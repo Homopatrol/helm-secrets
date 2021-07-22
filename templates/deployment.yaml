@@ -1,0 +1,5 @@
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{ else }} {{ .Release.Name }}-postgresql {{- end }}
+                  key: {{ .Values.postgresql.secretKey }}
