@@ -1,6 +1,8 @@
 # Helm-secrets
 A Postgresql example of how to handle secrets outside of a subchart in a Parent chart
 
+<!-- and example deployment repo that uses this can be found here -->
+
 ## Why would I need to do this?
 When you Create a chart with dependencies to other charts which are completely external these are refered to as "subcharts"
 
@@ -55,7 +57,7 @@ Now you can use Postgresqls chart in your parent chart.
 You can read more about configuring your Chart.yaml in the [helm documentation](https://helm.sh/docs/topics/charts/)
 
 ### Configuring Subcharts 
-
+//do this with values etc here we configure this 
 values.yaml
 ```
 
@@ -72,6 +74,7 @@ postgresql:
   existingSecret: my-postgresql-postgresql # This is the full name of the secret that will be created 
   secretKey: postgresql-password
 ```
+//explain the values here 
 | Name | Description | Value |
 |------------- |-------------|-------------|
 | createPostgresqlSecret | | true |
@@ -81,3 +84,10 @@ postgresql:
 | postgresql.postgresqlDatabase | | myDB |
 | postgresql.existingSecret | | my-postgresql-password |
 | postgresql.secretKey | | postgresql-password |
+
+//we can then use these values to create our postgres-secret.yaml
+```
+secet here
+```
+//more exaplaintion 
+//now we can use this in our deployment to login 
