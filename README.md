@@ -52,12 +52,32 @@ deprecated: # Whether this chart is deprecated (optional, boolean)
 ```
 Now you can use Postgresqls chart in your parent chart.
 
-You can read more about configuring your chart.yaml in the [helm documentation](https://helm.sh/docs/topics/charts/)
+You can read more about configuring your Chart.yaml in the [helm documentation](https://helm.sh/docs/topics/charts/)
 
 ### Configuring Subcharts 
 
 values.yaml
 ```
-Postgresql:
+
+createPostgresqlSecret: true # create the postgresql secret in Sonarqube chart, outside of the postgresql chart.
+
+## Configuration values for postgresql dependency
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+postgresql:
+  # Enable to deploy the PostgreSQL chart
   enabled: true
+  postgresqlUsername: "myUser"
+  postgresqlPassword: ""   
+  postgresqlDatabase: "myDB"
+  existingSecret: my-postgresql-postgresql # This is the full name of the secret that will be created 
+  secretKey: postgresql-password
 ```
+| Name | Description | Value |
+|------------- |-------------|-------------|
+| createPostgresqlSecret | | true |
+| postgresql.enabled | | true |
+| postgresql.postgresqlUsername | | myUser |
+| postgresql.postgresqlPassword | | "" |
+| postgresql.postgresqlDatabase | | myDB |
+| postgresql.existingSecret | | my-postgresql-password |
+| postgresql.secretKey | | postgresql-password |
