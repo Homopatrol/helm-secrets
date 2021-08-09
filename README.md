@@ -57,7 +57,7 @@ Now you can use Postgresqls chart in your parent chart.
 You can read more about configuring your Chart.yaml in the [helm documentation](https://helm.sh/docs/topics/charts/)
 
 ### Configuring Subcharts 
-
+<!-- With Helm, configuration settings are kept separate from the manifest formats. You can edit the configuration values without changing the rest of the manifest. -->
 We set values in the values.yaml files to populate our chart's templates.
 [values](./values.yaml)
 ```
