@@ -118,12 +118,16 @@ data:
   {{ end }}
 {{- end }}
 ```
-//more explaniation 
+By using the Helm flag **`{{- if .Release.IsUpgrade }}`** Only if a `helm upgrade` is perfromed will the block of code following this run.
+
+
 Now finally we need to reference the secret in our deployment in order for PostgreSQL to find the credentials correctly
 ```
+....
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{ else }} {{ .Release.Name }}-postgresql {{- end }}
                   key: {{ .Values.postgresql.secretKey }}
+....
 ```
