@@ -1,7 +1,26 @@
 # Helm-secrets
-A Postgresql example of how to handle secrets outside of a subchart in a Parent chart
+An example of how to handle secrets outside of a subchart in a Parent chart.
 
-<!-- and example deployment repo that uses this can be found here -->
+This repo references Postgresql as an example of a subchart to be used.
+
+A demo of how this feature works in a working helm chart can be found [here](https://github.com/Homopatrol/charts-1/tree/master/charts/sonarqube)
+
+```console
+# Install the chart
+Helm install <release_name>./
+
+# Check the value of the current secret
+kubectl/oc get secret
+
+# Wait for all the pods to be running before performing an upgrade
+kubectl/oc get pods
+
+# Perform and upgrade on the chart
+helm upgrade <release_name> ./ --reuse-values ./
+
+# Check the value of the secret again (this should be the same)
+kubectl/oc get secret
+```
 
 ## Why would I need to do this?
 When you Create a chart with dependencies to other charts which are completely external these are refered to as "subcharts"
@@ -118,7 +137,7 @@ data:
   {{ end }}
 {{- end }}
 ```
-By using the Helm flag **`{{- if .Release.IsUpgrade }}`** Only if a `helm upgrade` is perfromed will the block of code following this run.
+By using the Helm [Object](https://helm.sh/docs/chart_template_guide/builtin_objects/) **`{{- if .Release.IsUpgrade }}`** If a `helm upgrade` or `helm rollback` is performed then the block of code following this condition will run.
 
 
 Now finally we need to reference the secret in our deployment in order for PostgreSQL to find the credentials correctly
